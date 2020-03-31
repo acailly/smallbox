@@ -1,4 +1,4 @@
-const setCurrentView = require("../Engine/setCurrentView");
+const setCurrentView = require("../../Engine/setCurrentView");
 
 module.exports = function(application, params) {
   const { texte } = params;
@@ -9,5 +9,5 @@ module.exports = function(application, params) {
 
   application.tâches.push(texte);
 
-  setCurrentView(application, "Liste des tâches");
+  setCurrentView(application, "Vue/Liste des tâches");
 };

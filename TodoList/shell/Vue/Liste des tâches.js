@@ -1,6 +1,6 @@
-const prompt = require("./prompt");
-const executeCommand = require("../../Engine/executeCommand");
-const displayCurrentView = require("./displayCurrentView");
+const prompt = require("../../../Interface/Shell/prompt");
+const executeCommand = require("../../../Engine/executeCommand");
+const displayCurrentView = require("../../../Interface/Shell/displayCurrentView");
 
 module.exports = function(application, tâches) {
   console.log("========================");
@@ -13,7 +13,7 @@ module.exports = function(application, tâches) {
 
   prompt.question("Taper 1 pour Ajouter une tâche : ", choice => {
     if (choice === "1") {
-      executeCommand(application, "Ajouter une tâche");
+      executeCommand(application, "Commande/Ajouter une tâche");
       displayCurrentView(application);
     }
   });
