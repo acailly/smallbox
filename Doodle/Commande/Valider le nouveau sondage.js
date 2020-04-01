@@ -12,5 +12,5 @@ module.exports = function(application, params) {
     publié: false
   });
 
-  setCurrentView(application, "Vue/Création du sondage");
+  setCurrentView(application, "Vue/Création du sondage", { titreDuSondage: titre });
 };

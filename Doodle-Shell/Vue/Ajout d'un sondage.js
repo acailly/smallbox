@@ -4,12 +4,12 @@ const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
 
 module.exports = function(application, interfaceParams) {
   console.log("=========================");
-  console.log("=   Ajouter une tâche   =");
+  console.log("=   Ajouter un sondage   =");
   console.log("=========================");
   console.log("");
 
-  prompt.question("Taper le nom de la nouvelle tâche : ", text => {
-    executeCommand(application, "Commande/Valider la nouvelle tâche", { texte: text });
+  prompt.question("Taper le titre du nouveau sondage : ", text => {
+    executeCommand(application, "Commande/Valider le nouveau sondage", { titre: text });
     displayCurrentView(application, interfaceParams);
   });
 };

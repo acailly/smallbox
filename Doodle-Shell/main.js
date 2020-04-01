@@ -1,4 +1,4 @@
-const Application = require("../TodoList/Application");
+const Application = require("../Doodle/Application");
 const displayCurrentView = require("../Interface/Shell/displayCurrentView");
 
 const application = Application();
