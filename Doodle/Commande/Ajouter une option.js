@@ -1,5 +1,6 @@
 const setCurrentView = require("../../Engine/setCurrentView");
 
 module.exports = function(application, params) {
-  setCurrentView(application, "Vue/Ajout d'une option");
+  const {titreDuSondage} = params
+  setCurrentView(application, "Vue/Ajout d'une option", {titreDuSondage});
 };

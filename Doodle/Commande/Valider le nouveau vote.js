@@ -11,5 +11,5 @@ module.exports = function(application, params) {
 
   sondage.votes[participant] = choix;
 
-  setCurrentView(application, "Vue/Votes");
+  setCurrentView(application, "Vue/Votes", {titreDuSondage});
 };

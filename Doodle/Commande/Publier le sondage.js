@@ -7,5 +7,5 @@ module.exports = function(application, params) {
   
   sondage.publié = true;
 
-  setCurrentView(application, "Vue/Votes");
+  setCurrentView(application, "Vue/Votes", {titreDuSondage});
 };
