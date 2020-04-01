@@ -5,7 +5,7 @@ module.exports = function() {
     rootDir: __dirname
   };
 
-  setCurrentView(application, "Vue.Page d'accueil");
+  setCurrentView(application, "Vue/Accueil");
 
   return application;
 };

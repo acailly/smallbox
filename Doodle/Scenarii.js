@@ -6,52 +6,54 @@ const application = Application();
 
 // Créer un sondage
 
-checkCurrentViewName(application, "Vue/Page d'accueil");
+checkCurrentViewName(application, "Vue/Accueil");
 executeCommand(application, "Commande/Créer un nouveau sondage");
-checkCurrentViewName(application, "Vue/Page d'ajout d'un sondage");
+checkCurrentViewName(application, "Vue/Ajout d'un sondage");
 executeCommand(application, "Commande/Valider le nouveau sondage", {
   titre: "Prénom du bébé"
 });
-checkCurrentViewName(application, "Vue/Page de création du sondage");
+checkCurrentViewName(application, "Vue/Création du sondage");
 
 // Ajouter une option
 
 executeCommand(application, "Commande/Ajouter une option");
-checkCurrentViewName(application, "Vue/Page d'ajout d'une option");
-executeCommand(application, "Commande/Valider la nouvelle option", { option: "Lise" });
-checkCurrentViewName(application, "Vue/Page d'ajout d'une option");
-executeCommand(application, "Commande/Valider la nouvelle option", { option: "Emma" });
-checkCurrentViewName(application, "Vue/Page d'ajout d'une option");
+checkCurrentViewName(application, "Vue/Ajout d'une option");
+executeCommand(application, "Commande/Valider la nouvelle option", { titreDuSondage: "Prénom du bébé", option: "Lise" });
+checkCurrentViewName(application, "Vue/Ajout d'une option");
+executeCommand(application, "Commande/Valider la nouvelle option", { titreDuSondage: "Prénom du bébé", option: "Emma" });
+checkCurrentViewName(application, "Vue/Ajout d'une option");
 
 // Revenir à la page de création du sondage
 
 executeCommand(application, "Commande/Revenir au sondage");
-checkCurrentViewName(application, "Vue/Page de création du sondage");
+checkCurrentViewName(application, "Vue/Création du sondage");
 
 // Publier le sondage
 
-executeCommand(application, "Commande/Publier le sondage");
-checkCurrentViewName(application, "Vue/Page des votes");
+executeCommand(application, "Commande/Publier le sondage", { titreDuSondage: "Prénom du bébé" });
+checkCurrentViewName(application, "Vue/Votes");
 
 // Ajouter un vote
 
 executeCommand(application, "Commande/Ajouter un vote");
-checkCurrentViewName(application, "Vue/Page d'ajout d'un vote");
+checkCurrentViewName(application, "Vue/Ajout d'un vote");
 executeCommand(application, "Commande/Valider le nouveau vote", {
-  nom: "Alice",
-  votes: [
+  titreDuSondage: "Prénom du bébé",
+  participant: "Alice",
+  choix: [
     { option: "Lise", réponse: false },
     { option: "Emma", réponse: true }
   ]
 });
-checkCurrentViewName(application, "Vue/Page des votes");
+checkCurrentViewName(application, "Vue/Votes");
 executeCommand(application, "Commande/Ajouter un vote");
-checkCurrentViewName(application, "Vue/Page d'ajout d'un vote");
+checkCurrentViewName(application, "Vue/Ajout d'un vote");
 executeCommand(application, "Commande/Valider le nouveau vote", {
-  nom: "Bob",
-  votes: [
+  titreDuSondage: "Prénom du bébé",
+  participant: "Bob",
+  choix: [
     { option: "Lise", réponse: true },
     { option: "Emma", réponse: false }
   ]
 });
-checkCurrentViewName(application, "Vue/Page des votes");
+checkCurrentViewName(application, "Vue/Votes");
