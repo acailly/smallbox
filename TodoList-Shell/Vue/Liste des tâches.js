@@ -1,6 +1,6 @@
-const prompt = require("../../../Interface/Shell/prompt");
-const executeCommand = require("../../../Engine/executeCommand");
-const displayCurrentView = require("../../../Interface/Shell/displayCurrentView");
+const prompt = require("../../Interface/Shell/prompt");
+const executeCommand = require("../../Engine/executeCommand");
+const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
 
 module.exports = function(application, tâches) {
   console.log("========================");
