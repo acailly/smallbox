@@ -1,3 +1,5 @@
-module.exports = function(application) {
-  return application.tâches || [];
+module.exports = function(application, viewParams) {
+  return {
+    tâches: application.tâches || []
+  };
 };

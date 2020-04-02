@@ -1,3 +1,3 @@
-module.exports = function(application) {
+module.exports = function(application, viewParams) {
   return {};
 };

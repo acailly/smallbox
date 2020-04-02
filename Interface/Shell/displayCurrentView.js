@@ -1,9 +1,7 @@
-const getCurrentViewName = require("../../Engine/getCurrentViewName");
-
-module.exports = function(application, interfaceParams) {
-  const viewName = getCurrentViewName(application);
+module.exports = function(applicationController, interfaceParams) {
+  const viewName = applicationController.getCurrentViewName();
   const display = require(`${interfaceParams.rootDir}/${viewName}`);
-  display(application, interfaceParams);
+  display(applicationController, interfaceParams);
 };
 
 

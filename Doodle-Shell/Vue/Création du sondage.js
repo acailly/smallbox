@@ -1,16 +1,13 @@
 const prompt = require("../../Interface/Shell/prompt");
-const executeCommand = require("../../Engine/executeCommand");
-const getCurrentViewParams = require("../../Engine/getCurrentViewParams");
 const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
 
-module.exports = function(application, interfaceParams) {
-  const {titreDuSondage} = getCurrentViewParams(application);
-  const sondage = application.sondages.find(sondage => sondage.titre === titreDuSondage)
+module.exports = function(applicationController, interfaceParams) {
+  const { sondage } = applicationController.getCurrentViewContent();
 
   console.log("=============================");
   console.log("=   Création d'un sondage   =");
   console.log("=============================");
-  console.log("Titre du sondage :" + titreDuSondage);
+  console.log("Titre du sondage :" + sondage.titre);
   console.log("");
   console.log("Options :");
   console.log(sondage.options);
@@ -19,8 +16,8 @@ module.exports = function(application, interfaceParams) {
 
   prompt.question("Taper 1 pour Ajouter une option : ", choice => {
     if (choice === "1") {
-      executeCommand(application, "Commande/Ajouter une option");
-      displayCurrentView(application, interfaceParams);
+      applicationController.executeCommand("Commande/Ajouter une option");
+      displayCurrentView(applicationController, interfaceParams);
     }
   });
 };

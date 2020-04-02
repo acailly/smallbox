@@ -3,5 +3,5 @@ module.exports = function(application, commandName, commandParams) {
 
   const rootDir = application.rootDir;
   const command = require(`${rootDir}/${commandName}`);
-  command(application, commandParams || {});
+  return command(application, commandParams || {});
 };

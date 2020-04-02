@@ -9,7 +9,8 @@ module.exports = function(application, params) {
 
   application.sondages.push({
     titre,
-    publié: false
+    publié: false,
+    options: []
   });
 
   setCurrentView(application, "Vue/Création du sondage", { titreDuSondage: titre });
