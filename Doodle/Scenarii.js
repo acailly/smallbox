@@ -1,75 +1,148 @@
 const Application = require("./Application");
-const checkCurrentView = require("../Engine/checkCurrentView");
-const executeAction = require("../Engine/executeAction");
+const createApplicationController = require("../Engine/createApplicationController");
 
 const application = Application();
+const ʘ_ʘ = createApplicationController(application);
 
 // Créer un sondage
 
-checkCurrentView(application, "Vue/Accueil", {}, { sondages: [] });
-executeAction(application, "Action/Créer un nouveau sondage");
-checkCurrentView(application, "Vue/Ajout d'un sondage");
-executeAction(application, "Action/Valider le nouveau sondage", {
+ʘ_ʘ.checkCurrentView("Vue/Accueil", {}, { sondages: [] });
+ʘ_ʘ.executeAction("Action/Créer un nouveau sondage");
+ʘ_ʘ.checkCurrentView("Vue/Ajout d'un sondage", {}, {});
+ʘ_ʘ.executeAction("Action/Valider le nouveau sondage", {
   titre: "Prénom du bébé"
 });
-checkCurrentView(application, "Vue/Création du sondage", {
-  titreDuSondage: "Prénom du bébé"
-}, {sondage: {
-  titre: "Prénom du bébé",
-  publié: false,
-  options: []
-}});
+ʘ_ʘ.checkCurrentView(
+  "Vue/Création du sondage",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: [],
+      votes: []
+    }
+  }
+);
 
 // Ajouter une option
 
-executeAction(application, "Action/Ajouter une option", {
+ʘ_ʘ.executeAction("Action/Ajouter une option", {
   titreDuSondage: "Prénom du bébé"
 });
-checkCurrentView(application, "Vue/Ajout d'une option", {
-  titreDuSondage: "Prénom du bébé"
-});
-executeAction(application, "Action/Valider la nouvelle option", {
+ʘ_ʘ.checkCurrentView(
+  "Vue/Ajout d'une option",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: [],
+      votes: []
+    }
+  }
+);
+ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Lise"
 });
-checkCurrentView(application, "Vue/Ajout d'une option", {
-  titreDuSondage: "Prénom du bébé"
-});
-executeAction(application, "Action/Valider la nouvelle option", {
+ʘ_ʘ.checkCurrentView(
+  "Vue/Ajout d'une option",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: ["Lise"],
+      votes: []
+    }
+  }
+);
+ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Emma"
 });
-checkCurrentView(application, "Vue/Ajout d'une option", {
-  titreDuSondage: "Prénom du bébé"
-});
+ʘ_ʘ.checkCurrentView(
+  "Vue/Ajout d'une option",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: ["Lise", "Emma"],
+      votes: []
+    }
+  }
+);
 
 // Revenir à la page de création du sondage
 
-executeAction(application, "Action/Revenir au sondage", {
+ʘ_ʘ.executeAction("Action/Revenir au sondage", {
   titreDuSondage: "Prénom du bébé"
 });
-checkCurrentView(application, "Vue/Création du sondage", {
-  titreDuSondage: "Prénom du bébé"
-});
+ʘ_ʘ.checkCurrentView(
+  "Vue/Création du sondage",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: ["Lise", "Emma"],
+      votes: []
+    }
+  }
+);
 
 // Publier le sondage
 
-executeAction(application, "Action/Publier le sondage", {
+ʘ_ʘ.executeAction("Action/Publier le sondage", {
   titreDuSondage: "Prénom du bébé"
 });
-checkCurrentView(application, "Vue/Votes", {
-  titreDuSondage: "Prénom du bébé"
-});
+ʘ_ʘ.checkCurrentView(
+  "Vue/Votes",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: []
+    }
+  }
+);
 
 // Ajouter un vote
 
-executeAction(application, "Action/Ajouter un vote", {
+ʘ_ʘ.executeAction("Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé"
 });
-checkCurrentView(application, "Vue/Ajout d'un vote", {
-  titreDuSondage: "Prénom du bébé"
-});
-executeAction(application, "Action/Valider le nouveau vote", {
+ʘ_ʘ.checkCurrentView(
+  "Vue/Ajout d'un vote",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: []
+    }
+  }
+);
+ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Alice",
   choix: [
@@ -77,16 +150,54 @@ executeAction(application, "Action/Valider le nouveau vote", {
     { option: "Emma", réponse: true }
   ]
 });
-checkCurrentView(application, "Vue/Votes", {
+ʘ_ʘ.checkCurrentView(
+  "Vue/Votes",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: [
+        {
+          participant: "Alice",
+          choix: [
+            { option: "Lise", réponse: false },
+            { option: "Emma", réponse: true }
+          ]
+        }
+      ]
+    }
+  }
+);
+ʘ_ʘ.executeAction("Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé"
 });
-executeAction(application, "Action/Ajouter un vote", {
-  titreDuSondage: "Prénom du bébé"
-});
-checkCurrentView(application, "Vue/Ajout d'un vote", {
-  titreDuSondage: "Prénom du bébé"
-});
-executeAction(application, "Action/Valider le nouveau vote", {
+ʘ_ʘ.checkCurrentView(
+  "Vue/Ajout d'un vote",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: [
+        {
+          participant: "Alice",
+          choix: [
+            { option: "Lise", réponse: false },
+            { option: "Emma", réponse: true }
+          ]
+        }
+      ]
+    }
+  }
+);
+ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Bob",
   choix: [
@@ -94,6 +205,32 @@ executeAction(application, "Action/Valider le nouveau vote", {
     { option: "Emma", réponse: false }
   ]
 });
-checkCurrentView(application, "Vue/Votes", {
-  titreDuSondage: "Prénom du bébé"
-});
+ʘ_ʘ.checkCurrentView(
+  "Vue/Votes",
+  {
+    titreDuSondage: "Prénom du bébé"
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: [
+        {
+          participant: "Alice",
+          choix: [
+            { option: "Lise", réponse: false },
+            { option: "Emma", réponse: true }
+          ]
+        },
+        {
+          participant: "Bob",
+          choix: [
+            { option: "Lise", réponse: true },
+            { option: "Emma", réponse: false }
+          ]
+        }
+      ]
+    }
+  }
+);

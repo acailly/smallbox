@@ -10,8 +10,11 @@ module.exports = function(application, params) {
   application.sondages.push({
     titre,
     publié: false,
-    options: []
+    options: [],
+    votes: []
   });
 
-  setCurrentView(application, "Vue/Création du sondage", { titreDuSondage: titre });
+  setCurrentView(application, "Vue/Création du sondage", {
+    titreDuSondage: titre
+  });
 };
