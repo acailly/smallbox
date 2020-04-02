@@ -7,9 +7,9 @@ const applicationController = createApplicationController(application)
 // Ajouter une tâche
 
 applicationController.checkCurrentView("Vue/Liste des tâches", {}, { tâches: [] });
-applicationController.executeCommand("Commande/Ajouter une tâche");
+applicationController.executeAction("Action/Ajouter une tâche");
 applicationController.checkCurrentView("Vue/Ajout d'une tâche");
-applicationController.executeCommand("Commande/Valider la nouvelle tâche", {
+applicationController.executeAction("Action/Valider la nouvelle tâche", {
   texte: "Toto"
 });
 applicationController.checkCurrentView("Vue/Liste des tâches", {}, { tâches: ["Toto"] });

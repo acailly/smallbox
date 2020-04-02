@@ -8,7 +8,7 @@ module.exports = function(applicationController, interfaceParams) {
   console.log("");
 
   prompt.question("Taper le titre du nouveau sondage : ", text => {
-    applicationController.executeCommand("Commande/Valider le nouveau sondage", { titre: text });
+    applicationController.executeAction("Action/Valider le nouveau sondage", { titre: text });
     displayCurrentView(applicationController, interfaceParams);
   });
 };

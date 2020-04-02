@@ -1,15 +1,15 @@
 const Application = require("./Application");
 const checkCurrentView = require("../Engine/checkCurrentView");
-const executeCommand = require("../Engine/executeCommand");
+const executeAction = require("../Engine/executeAction");
 
 const application = Application();
 
 // Créer un sondage
 
 checkCurrentView(application, "Vue/Accueil", {}, { sondages: [] });
-executeCommand(application, "Commande/Créer un nouveau sondage");
+executeAction(application, "Action/Créer un nouveau sondage");
 checkCurrentView(application, "Vue/Ajout d'un sondage");
-executeCommand(application, "Commande/Valider le nouveau sondage", {
+executeAction(application, "Action/Valider le nouveau sondage", {
   titre: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Création du sondage", {
@@ -22,20 +22,20 @@ checkCurrentView(application, "Vue/Création du sondage", {
 
 // Ajouter une option
 
-executeCommand(application, "Commande/Ajouter une option", {
+executeAction(application, "Action/Ajouter une option", {
   titreDuSondage: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Ajout d'une option", {
   titreDuSondage: "Prénom du bébé"
 });
-executeCommand(application, "Commande/Valider la nouvelle option", {
+executeAction(application, "Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Lise"
 });
 checkCurrentView(application, "Vue/Ajout d'une option", {
   titreDuSondage: "Prénom du bébé"
 });
-executeCommand(application, "Commande/Valider la nouvelle option", {
+executeAction(application, "Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Emma"
 });
@@ -45,7 +45,7 @@ checkCurrentView(application, "Vue/Ajout d'une option", {
 
 // Revenir à la page de création du sondage
 
-executeCommand(application, "Commande/Revenir au sondage", {
+executeAction(application, "Action/Revenir au sondage", {
   titreDuSondage: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Création du sondage", {
@@ -54,7 +54,7 @@ checkCurrentView(application, "Vue/Création du sondage", {
 
 // Publier le sondage
 
-executeCommand(application, "Commande/Publier le sondage", {
+executeAction(application, "Action/Publier le sondage", {
   titreDuSondage: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Votes", {
@@ -63,13 +63,13 @@ checkCurrentView(application, "Vue/Votes", {
 
 // Ajouter un vote
 
-executeCommand(application, "Commande/Ajouter un vote", {
+executeAction(application, "Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Ajout d'un vote", {
   titreDuSondage: "Prénom du bébé"
 });
-executeCommand(application, "Commande/Valider le nouveau vote", {
+executeAction(application, "Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Alice",
   choix: [
@@ -80,13 +80,13 @@ executeCommand(application, "Commande/Valider le nouveau vote", {
 checkCurrentView(application, "Vue/Votes", {
   titreDuSondage: "Prénom du bébé"
 });
-executeCommand(application, "Commande/Ajouter un vote", {
+executeAction(application, "Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé"
 });
 checkCurrentView(application, "Vue/Ajout d'un vote", {
   titreDuSondage: "Prénom du bébé"
 });
-executeCommand(application, "Commande/Valider le nouveau vote", {
+executeAction(application, "Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Bob",
   choix: [

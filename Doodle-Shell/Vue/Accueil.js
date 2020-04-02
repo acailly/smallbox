@@ -14,7 +14,7 @@ module.exports = function(applicationController, interfaceParams) {
 
   prompt.question("Taper 1 pour Ajouter une sondage : ", choice => {
     if (choice === "1") {
-      applicationController.executeCommand("Commande/Créer un nouveau sondage");
+      applicationController.executeAction("Action/Créer un nouveau sondage");
       displayCurrentView(applicationController, interfaceParams);
     }
   });

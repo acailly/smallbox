@@ -8,7 +8,7 @@ module.exports = function(applicationController, interfaceParams) {
   console.log("");
 
   prompt.question("Taper le nom de la nouvelle tâche : ", text => {
-    applicationController.executeCommand("Commande/Valider la nouvelle tâche", { texte: text });
+    applicationController.executeAction("Action/Valider la nouvelle tâche", { texte: text });
     displayCurrentView(applicationController, interfaceParams);
   });
 };

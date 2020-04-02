@@ -1,4 +1,4 @@
-const executeCommand = require("./executeCommand");
+const executeAction = require("./executeAction");
 const getCurrentViewName = require("./getCurrentViewName");
 const getCurrentViewParams = require("./getCurrentViewParams");
 const getCurrentViewContent = require("./getCurrentViewContent");
@@ -7,8 +7,8 @@ const checkCurrentView = require("./checkCurrentView");
 
 module.exports = function(application) {
   return {
-    executeCommand: (commandName, commandParams) =>
-      executeCommand(application, commandName, commandParams),
+    executeAction: (actionName, actionParams) =>
+      executeAction(application, actionName, actionParams),
     setCurrentView: (viewName, viewParams) =>
       setCurrentView(application, viewName, viewParams),
     getCurrentViewName: () => getCurrentViewName(application),

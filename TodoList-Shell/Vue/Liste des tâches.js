@@ -14,7 +14,7 @@ module.exports = function(applicationController, interfaceParams) {
 
   prompt.question("Taper 1 pour Ajouter une tâche : ", choice => {
     if (choice === "1") {
-      applicationController.executeCommand("Commande/Ajouter une tâche");
+      applicationController.executeAction("Action/Ajouter une tâche");
       displayCurrentView(applicationController, interfaceParams);
     }
   });
