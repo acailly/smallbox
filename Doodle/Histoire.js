@@ -1,8 +1,12 @@
 const Application = require("./Application");
 const createApplicationController = require("../Engine/createApplicationController");
+const createStoryWrapper = require("../Engine/createStoryWrapper");
 
-const application = Application();
-const ʘ_ʘ = createApplicationController(application);
+// const application = Application();
+// const ʘ_ʘ = createApplicationController(application);
+
+const storyFile = __dirname + "/Histoire.html";
+const ʘ_ʘ = createStoryWrapper(storyFile);
 
 // Créer un sondage
 
