@@ -18,7 +18,7 @@ function valueToHtml(value) {
   }
 }
 
-module.exports = function(targetFile) {
+module.exports = function (targetFile) {
   const html = `
     <h1>Histoire</h1>
   `;
@@ -57,6 +57,6 @@ module.exports = function(targetFile) {
         </section>
       `;
       fs.appendFileSync(targetFile, html);
-    }
+    },
   };
 };
