@@ -24,6 +24,7 @@ module.exports = function (applicationController, targetFile) {
       .card {
         border: solid 3px black;
         padding: 10px 30px;
+        margin-bottom: 0.5rem;
       }
       .view {
         background-color: palegreen;
@@ -40,6 +41,11 @@ module.exports = function (applicationController, targetFile) {
       .width-70 {
         width: 70px;
       }
+      .small {
+        font-weight: 300;
+        font-size: 1.3rem;
+        color: slategray;
+      }
     </style>
 
     <h1>Histoire</h1>
@@ -50,7 +56,7 @@ module.exports = function (applicationController, targetFile) {
     executeAction: (actionName, actionParams) => {
       const html = `
         <div class="card action">
-          <h2>Action "${actionName}"</h2>
+          <h2>${actionName}<span class="small"> - Action</span></h2>
           <h3>Paramètres :</h3>
           <p>
             ${valueToHtml(actionParams)}
@@ -71,7 +77,7 @@ module.exports = function (applicationController, targetFile) {
     ) => {
       const html = `
         <div class="card view">
-          <h2>Vue "${expectedViewName}"</h2>
+          <h2>${expectedViewName}<span class="small"> - Vue</span></h2>
           <div class="row">
             <div>
               <h3>Paramètres :</h3>
