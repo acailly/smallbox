@@ -18,8 +18,30 @@ function valueToHtml(value) {
   }
 }
 
-module.exports = function (targetFile) {
+module.exports = function (applicationController, targetFile) {
   const html = `
+    <style>
+      .card {
+        border: solid 3px black;
+        padding: 10px 30px;
+      }
+      .view {
+        background-color: palegreen;
+        margin-right: 10%;
+      }
+      .action{
+        background-color: lightskyblue;
+        margin-left: 10%;
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+      .width-70 {
+        width: 70px;
+      }
+    </style>
+
     <h1>Histoire</h1>
   `;
   fs.writeFileSync(targetFile, html);
@@ -27,36 +49,49 @@ module.exports = function (targetFile) {
   return {
     executeAction: (actionName, actionParams) => {
       const html = `
-        <section>
+        <div class="card action">
           <h2>Action "${actionName}"</h2>
           <h3>Paramètres :</h3>
           <p>
             ${valueToHtml(actionParams)}
           </p>
-        </section>
+        </div>
       `;
       fs.appendFileSync(targetFile, html);
+
+      applicationController.executeAction(actionName, actionParams);
     },
-    setCurrentView: (viewName, viewParams) => {},
+    setCurrentView: (viewName, viewParams) => {
+      applicationController.setCurrentView(viewName, viewParams);
+    },
     checkCurrentView: (
       expectedViewName,
       expectedViewParams,
       expectedViewContent
     ) => {
       const html = `
-        <section>
+        <div class="card view">
           <h2>Vue "${expectedViewName}"</h2>
-          <h3>Paramètres :</h3>
-          <p>
-          ${valueToHtml(expectedViewParams)}
-          </p>
-          <h3>Contenu :</h3>
-          <p>
-            ${valueToHtml(expectedViewContent)}
-          </p>
-        </section>
+          <div class="row">
+            <div>
+              <h3>Paramètres :</h3>
+              <p>
+              ${valueToHtml(expectedViewParams)}
+              </p>
+            </div>
+            <div class="width-70"></div>
+            <div>
+              <h3>Contenu :</h3>
+              <p>
+                ${valueToHtml(expectedViewContent)}
+              </p>
+            </div>
+          </div>
+        </div>
       `;
       fs.appendFileSync(targetFile, html);
+
+      applicationController.checkCurrentView(expectedViewName, expectedViewParams, expectedViewContent);
     },
   };
 };
