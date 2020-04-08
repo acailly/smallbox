@@ -14,13 +14,12 @@ module.exports = function(applicationController, interfaceParams) {
     sondage.options.map(option => `\t${option}\t`).join("|");
   console.log(headers);
 
-  const votes = sondage.votes;
-  votes.forEach(vote => {
+  sondage.votes.forEach(vote => {
     const line =
       `\t${vote.participant}\t|` +
       sondage.options
-        .map(option => vote.choix.find(c => c.option === option).réponse)
-        .map(réponse => `\t${réponse}\t`)
+        .map(option => vote.choix.indexOf(option) >= 0)
+        .map(réponseOui => `\t${réponseOui ? 'oui' : 'non'}\t`)
         .join("|");
     console.log(line);
   });

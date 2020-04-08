@@ -19,12 +19,12 @@ module.exports = function(applicationController, interfaceParams) {
   function makeNextChoice(participant, choix, nextOption, remainingOptions) {
     if (nextOption) {
       prompt.question(
-        `Taper la réponse pour le choix '${nextOption}' : `,
+        `Taper la réponse pour le choix '${nextOption}' (oui/NON) : `,
         réponse => {
-          choix.push({
-            option: nextOption,
-            réponse
-          });
+          const réponseOui = réponse.toLowerCase() === 'oui'
+          if(réponseOui){
+            choix.push(nextOption);
+          }
 
           const [newNextOptions, ...newRemainingOptions] = remainingOptions;
           makeNextChoice(

@@ -19,6 +19,7 @@ module.exports = function(applicationController, interfaceParams) {
     <h2>Prêt à publier ?</h2>
   
     <form method="POST" action="/Action/Publier le sondage">
+      <input type="hidden" name="titreDuSondage" value="${sondage.titre}">
       <button type="submit">Publier le sondage</button>
     </form>
   `

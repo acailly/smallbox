@@ -47,7 +47,9 @@ function collectRequestData(request, callback) {
       body += chunk.toString();
     });
     request.on("end", () => {
-      callback(parse(body));
+      const parsedBody = parse(body);
+      const parsedBodyAsObject = JSON.parse(JSON.stringify(parsedBody)); 
+      callback(parsedBodyAsObject);
     });
   } else {
     callback(null);
@@ -81,13 +83,7 @@ function createHttpServer(applicationController, interfaceParams) {
         if (req.method === "GET") {
           showCurrentView(applicationController, interfaceParams, res);
         } else if (req.method === "POST") {
-          collectRequestData(req, (result) => {
-            const bodyParams = new URLSearchParams(result);
-            const actionParams = {};
-            for (const key of bodyParams.keys()) {
-              actionParams[key] = bodyParams.get(key);
-            }
-
+          collectRequestData(req, (actionParams) => {
             const actionName = decodeURIComponent(parsedUrl.pathname);
             applicationController.executeAction(actionName, actionParams);
 
