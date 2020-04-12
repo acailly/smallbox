@@ -1,4 +1,5 @@
 # smallbox
+
 Small toolbox for small apps
 
 ## TODO
@@ -8,5 +9,4 @@ Small toolbox for small apps
 - Le stockage ne devrait pas se faire dans l'application (ou applicationParams)
 - Le stockage pourrait se faire via une autre application dédiée au stockage qu'on passe dans l'applicationParams
 
-
-
+- Faire une interface en pure JS pour faire une SPA ? (service worker ?)

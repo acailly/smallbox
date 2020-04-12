@@ -5,7 +5,14 @@ function valueToHtml(value) {
     return "";
   }
 
-  if (typeof value === "object") {
+  if (Array.isArray(value)) {
+    let html = "<ul>";
+    for (v of value) {
+      html += `<li>${valueToHtml(v)}</li>`;
+    }
+    html += "</ul>";
+    return html;
+  } else if (typeof value === "object") {
     let html = "<ul>";
     const keys = Object.keys(value || {});
     for (key of keys) {
@@ -54,9 +61,12 @@ module.exports = function (applicationController, targetFile) {
 
   return {
     executeAction: (actionName, actionParams) => {
+      const splittedActionName = actionName.split("/");
+      const actionNameSuffix = splittedActionName.pop();
+      const actionNamePrefix = splittedActionName.join("/");
       const html = `
         <div class="card action">
-          <h2>${actionName}<span class="small"> - Action</span></h2>
+          <h2>${actionNameSuffix}<span class="small"> - Action située dans ${actionNamePrefix}/</span></h2>
           <h3>Paramètres :</h3>
           <p>
             ${valueToHtml(actionParams)}
@@ -75,9 +85,14 @@ module.exports = function (applicationController, targetFile) {
       expectedViewParams,
       expectedViewContent
     ) => {
+      const splittedViewName = expectedViewName.split("/");
+      const viewNameSuffix = splittedViewName.pop();
+      const viewNamePrefix = splittedViewName.join("/");
       const html = `
         <div class="card view">
-          <h2>${expectedViewName}<span class="small"> - Vue</span></h2>
+          <h2>
+            ${viewNameSuffix}<span class="small"> - Vue située dans ${viewNamePrefix}/</span>
+          </h2>
           <div class="row">
             <div>
               <h3>Paramètres :</h3>
@@ -97,7 +112,11 @@ module.exports = function (applicationController, targetFile) {
       `;
       fs.appendFileSync(targetFile, html);
 
-      applicationController.checkCurrentView(expectedViewName, expectedViewParams, expectedViewContent);
+      applicationController.checkCurrentView(
+        expectedViewName,
+        expectedViewParams,
+        expectedViewContent
+      );
     },
   };
 };
