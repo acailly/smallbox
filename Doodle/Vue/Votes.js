@@ -1,9 +1,9 @@
-module.exports = function(application, viewParams) {
+module.exports = function (applicationParams, viewParams) {
   const { titreDuSondage } = viewParams;
-  const sondage = application.sondages.find(
-    sondage => sondage.titre === titreDuSondage
+  const sondage = applicationParams.sondages.find(
+    (sondage) => sondage.titre === titreDuSondage
   );
   return {
-    sondage
+    sondage,
   };
 };

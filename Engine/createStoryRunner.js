@@ -38,7 +38,7 @@ function checkCurrentView(
   }
 }
 
-module.exports = function (applicationController, targetFile) {
+module.exports = function (applicationController) {
   return {
     executeStartAction: () => applicationController.executeStartAction(),
     executeAction: (actionName, actionParams) =>

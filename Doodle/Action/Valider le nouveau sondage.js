@@ -1,20 +1,20 @@
 const createView = require("../../Engine/createView");
 
-module.exports = function (application, params) {
-  const { titre } = params;
+module.exports = function (applicationParams, actionParams) {
+  const { titre } = actionParams;
 
-  if (!application.sondages) {
-    application.sondages = [];
+  if (!applicationParams.sondages) {
+    applicationParams.sondages = [];
   }
 
-  application.sondages.push({
+  applicationParams.sondages.push({
     titre,
     publié: false,
     options: [],
     votes: [],
   });
 
-  return createView(application, "Vue/Création du sondage", {
+  return createView(applicationParams, "Vue/Création du sondage", {
     titreDuSondage: titre,
   });
 };

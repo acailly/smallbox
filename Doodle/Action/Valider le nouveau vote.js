@@ -1,9 +1,9 @@
 const createView = require("../../Engine/createView");
 
-module.exports = function (application, params) {
-  const { titreDuSondage, participant, choix } = params;
+module.exports = function (applicationParams, actionParams) {
+  const { titreDuSondage, participant, choix } = actionParams;
 
-  const sondage = application.sondages.find(
+  const sondage = applicationParams.sondages.find(
     (sondage) => sondage.titre === titreDuSondage
   );
 
@@ -16,5 +16,5 @@ module.exports = function (application, params) {
     choix,
   });
 
-  return createView(application, "Vue/Votes", { titreDuSondage });
+  return createView(applicationParams, "Vue/Votes", { titreDuSondage });
 };

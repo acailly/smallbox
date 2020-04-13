@@ -1,5 +1,5 @@
-module.exports = function (application, actionName, actionParams) {
-  const rootDir = application.rootDir;
+module.exports = function (applicationParams, actionName, actionParams) {
+  const rootDir = applicationParams.rootDir;
   const action = require(`${rootDir}/${actionName}`);
-  return action(application, actionParams || {});
+  return action(applicationParams, actionParams || {});
 };

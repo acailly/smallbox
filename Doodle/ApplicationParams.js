@@ -1,9 +1,9 @@
 module.exports = function () {
-  const application = {
+  const applicationParams = {
     rootDir: __dirname,
     startActionName: "Action/Démarrer l'application",
     startActionParams: {},
   };
 
-  return application;
+  return applicationParams;
 };

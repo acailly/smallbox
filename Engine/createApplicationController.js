@@ -1,14 +1,14 @@
 const executeAction = require("./executeAction");
 
-module.exports = function (application) {
+module.exports = function (applicationParams) {
   const listeners = [];
 
-  function doExecuteAction(application, actionName, actionParams) {
+  function doExecuteAction(applicationParams, actionName, actionParams) {
     listeners.forEach((listener) => {
       listener.beforeAction(actionName, actionParams);
     });
 
-    const nextView = executeAction(application, actionName, actionParams);
+    const nextView = executeAction(applicationParams, actionName, actionParams);
 
     listeners.forEach((listener) => {
       listener.afterAction(actionName, actionParams, nextView);
@@ -20,13 +20,13 @@ module.exports = function (application) {
   return {
     executeStartAction: () => {
       return doExecuteAction(
-        application,
-        application.startActionName,
-        application.startActionParams
+        applicationParams,
+        applicationParams.startActionName,
+        applicationParams.startActionParams
       );
     },
     executeAction: (actionName, actionParams) => {
-      return doExecuteAction(application, actionName, actionParams);
+      return doExecuteAction(applicationParams, actionName, actionParams);
     },
     addListener: (listener) => {
       listeners.push(listener);

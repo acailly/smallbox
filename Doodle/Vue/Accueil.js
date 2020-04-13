@@ -1,5 +1,5 @@
-module.exports = function(application, viewParams) {
+module.exports = function (applicationParams, viewParams) {
   return {
-    sondages: application.sondages || []
+    sondages: applicationParams.sondages || [],
   };
 };
