@@ -1,5 +1,5 @@
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   const html = `
     <h1>Création d'un sondage</h1>
@@ -8,7 +8,7 @@ module.exports = function(applicationController, interfaceParams) {
 
     <h2>Options</h2>
     <ul>
-      ${sondage.options.map(option => `<li>${option}</li>`).join('\n')}
+      ${sondage.options.map((option) => `<li>${option}</li>`).join("\n")}
     </ul>    
 
     <form method="POST" action="/Action/Ajouter une option">
@@ -22,7 +22,7 @@ module.exports = function(applicationController, interfaceParams) {
       <input type="hidden" name="titreDuSondage" value="${sondage.titre}">
       <button type="submit">Publier le sondage</button>
     </form>
-  `
+  `;
 
   return html;
 };

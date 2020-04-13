@@ -1,6 +1,6 @@
-const setCurrentView = require("../../Engine/setCurrentView");
+const createView = require("../../Engine/createView");
 
-module.exports = function(application, params) {
+module.exports = function (application, params) {
   const { titreDuSondage } = params;
-  setCurrentView(application, "Vue/Ajout d'un vote", {titreDuSondage});
+  return createView(application, "Vue/Ajout d'un vote", { titreDuSondage });
 };

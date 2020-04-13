@@ -1,5 +1,5 @@
-module.exports = function (applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   const html = `
     <h1>Votes</h1>
@@ -15,15 +15,19 @@ module.exports = function (applicationController, interfaceParams) {
         </tr>
       </thead>
       <tbody>
-      ${sondage.votes.map((vote) => `
+      ${sondage.votes
+        .map(
+          (vote) => `
           <tr>
             <td>${vote.participant}</td>
             ${sondage.options
-              .map(option => vote.choix.indexOf(option) >= 0)
-              .map((réponseOui) => `<td>${réponseOui ? 'oui' : 'non'}</td>`)
+              .map((option) => vote.choix.indexOf(option) >= 0)
+              .map((réponseOui) => `<td>${réponseOui ? "oui" : "non"}</td>`)
               .join("\n")}
           </tr>
-        `).join("\n")}
+        `
+        )
+        .join("\n")}
       </tbody>    
     </table>
 

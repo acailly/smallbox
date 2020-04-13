@@ -1,8 +1,8 @@
 const prompt = require("../../Interface/Shell/prompt");
-const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
+const displayView = require("../../Interface/Shell/displayView");
 
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   console.log("=======================");
   console.log("=   Ajouter un vote   =");
@@ -11,7 +11,7 @@ module.exports = function(applicationController, interfaceParams) {
   console.log("");
   console.log("------------------------");
 
-  prompt.question("Taper le nom du participant : ", participant => {
+  prompt.question("Taper le nom du participant : ", (participant) => {
     const [nextOption, ...remainingOptions] = sondage.options;
     makeNextChoice(participant, [], nextOption, remainingOptions);
   });
@@ -20,9 +20,9 @@ module.exports = function(applicationController, interfaceParams) {
     if (nextOption) {
       prompt.question(
         `Taper la réponse pour le choix '${nextOption}' (oui/NON) : `,
-        réponse => {
-          const réponseOui = réponse.toLowerCase() === 'oui'
-          if(réponseOui){
+        (réponse) => {
+          const réponseOui = réponse.toLowerCase() === "oui";
+          if (réponseOui) {
             choix.push(nextOption);
           }
 
@@ -36,12 +36,15 @@ module.exports = function(applicationController, interfaceParams) {
         }
       );
     } else {
-      applicationController.executeAction("Action/Valider le nouveau vote", {
-        titreDuSondage: sondage.titre,
-        participant,
-        choix
-      });
-      displayCurrentView(applicationController, interfaceParams);
+      const nextView = applicationController.executeAction(
+        "Action/Valider le nouveau vote",
+        {
+          titreDuSondage: sondage.titre,
+          participant,
+          choix,
+        }
+      );
+      displayView(nextView, applicationController, interfaceParams);
     }
   }
 };

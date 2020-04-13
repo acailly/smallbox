@@ -1,4 +1,4 @@
-module.exports = function(applicationController, interfaceParams) {
+module.exports = function (view, applicationController, interfaceParams) {
   const html = `
     <h1>Ajout d'un sondage</h1>
 
@@ -7,7 +7,7 @@ module.exports = function(applicationController, interfaceParams) {
       <input type="text" id="titre" name="titre">
       <button type="submit">Valider la création du nouveau sondage</button>
     </form>
-  `
+  `;
 
   return html;
 };

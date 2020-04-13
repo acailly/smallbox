@@ -1,12 +1,15 @@
 const Application = require("../Doodle/Application");
 const createApplicationController = require("../Engine/createApplicationController");
-const displayCurrentView = require("../Interface/Shell/displayCurrentView");
+const displayView = require("../Interface/Shell/displayView");
 
 const application = Application();
 const applicationController = createApplicationController(application);
 
 const interfaceParams = {
-    rootDir: __dirname
-}
+  rootDir: __dirname,
+};
 
-displayCurrentView(applicationController, interfaceParams);
+const view = applicationController.executeAction(
+  "Action/Démarrer l'application"
+);
+displayView(view, applicationController, interfaceParams);

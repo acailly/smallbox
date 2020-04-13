@@ -1,11 +1,9 @@
-const setCurrentView = require("../Engine/setCurrentView");
-
-module.exports = function() {
+module.exports = function () {
   const application = {
-    rootDir: __dirname
+    rootDir: __dirname,
+    startActionName: "Action/Démarrer l'application",
+    startActionParams: {},
   };
-
-  setCurrentView(application, "Vue/Accueil");
 
   return application;
 };

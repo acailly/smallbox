@@ -1,8 +1,8 @@
 const prompt = require("../../Interface/Shell/prompt");
-const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
+const displayView = require("../../Interface/Shell/displayView");
 
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   console.log("==========================");
   console.log("=   Ajouter une option   =");
@@ -16,21 +16,24 @@ module.exports = function(applicationController, interfaceParams) {
 
   prompt.question(
     "Taper le nom de la nouvelle option ou 'retour' pour revenir à l'étape précédente : ",
-    option => {
+    (option) => {
       if (option === "retour") {
-        applicationController.executeAction("Action/Revenir au sondage", {
-          titreDuSondage: sondage.titre
-        });
-        displayCurrentView(applicationController, interfaceParams);
+        const nextView = applicationController.executeAction(
+          "Action/Revenir au sondage",
+          {
+            titreDuSondage: sondage.titre,
+          }
+        );
+        displayView(nextView, applicationController, interfaceParams);
       } else {
-        applicationController.executeAction(
+        const nextView = applicationController.executeAction(
           "Action/Valider la nouvelle option",
           {
             titreDuSondage: sondage.titre,
-            option
+            option,
           }
         );
-        displayCurrentView(applicationController, interfaceParams);
+        displayView(nextView, applicationController, interfaceParams);
       }
     }
   );

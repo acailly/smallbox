@@ -60,6 +60,7 @@ module.exports = function (applicationController, targetFile) {
   fs.writeFileSync(targetFile, html);
 
   return {
+    executeStartAction: () => applicationController.executeStartAction(),
     executeAction: (actionName, actionParams) => {
       const splittedActionName = actionName.split("/");
       const actionNameSuffix = splittedActionName.pop();
@@ -75,12 +76,10 @@ module.exports = function (applicationController, targetFile) {
       `;
       fs.appendFileSync(targetFile, html);
 
-      applicationController.executeAction(actionName, actionParams);
-    },
-    setCurrentView: (viewName, viewParams) => {
-      applicationController.setCurrentView(viewName, viewParams);
+      return applicationController.executeAction(actionName, actionParams);
     },
     checkCurrentView: (
+      view,
       expectedViewName,
       expectedViewParams,
       expectedViewContent
@@ -113,6 +112,7 @@ module.exports = function (applicationController, targetFile) {
       fs.appendFileSync(targetFile, html);
 
       applicationController.checkCurrentView(
+        view,
         expectedViewName,
         expectedViewParams,
         expectedViewContent

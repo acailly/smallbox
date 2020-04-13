@@ -1,6 +1,6 @@
-const setCurrentView = require("../../Engine/setCurrentView");
+const createView = require("../../Engine/createView");
 
-module.exports = function(application, params) {
+module.exports = function (application, params) {
   const { titre } = params;
 
   if (!application.sondages) {
@@ -11,10 +11,10 @@ module.exports = function(application, params) {
     titre,
     publié: false,
     options: [],
-    votes: []
+    votes: [],
   });
 
-  setCurrentView(application, "Vue/Création du sondage", {
-    titreDuSondage: titre
+  return createView(application, "Vue/Création du sondage", {
+    titreDuSondage: titre,
   });
 };

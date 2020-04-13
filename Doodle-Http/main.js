@@ -6,8 +6,8 @@ const application = Application();
 const applicationController = createApplicationController(application);
 
 const interfaceParams = {
-    rootDir: __dirname,
-    port: 2222
-}
+  rootDir: __dirname,
+  port: 22222,
+};
 
 createHttpServer(applicationController, interfaceParams);

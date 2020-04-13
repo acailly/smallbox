@@ -1,8 +1,9 @@
 const prompt = require("../../Interface/Shell/prompt");
-const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
+const displayView = require("../../Interface/Shell/displayView");
 
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
+
   console.log("=============");
   console.log("=   Votes   =");
   console.log("=============");
@@ -11,15 +12,15 @@ module.exports = function(applicationController, interfaceParams) {
 
   const headers =
     "\tParticipant\t|" +
-    sondage.options.map(option => `\t${option}\t`).join("|");
+    sondage.options.map((option) => `\t${option}\t`).join("|");
   console.log(headers);
 
-  sondage.votes.forEach(vote => {
+  sondage.votes.forEach((vote) => {
     const line =
       `\t${vote.participant}\t|` +
       sondage.options
-        .map(option => vote.choix.indexOf(option) >= 0)
-        .map(réponseOui => `\t${réponseOui ? 'oui' : 'non'}\t`)
+        .map((option) => vote.choix.indexOf(option) >= 0)
+        .map((réponseOui) => `\t${réponseOui ? "oui" : "non"}\t`)
         .join("|");
     console.log(line);
   });
@@ -27,14 +28,17 @@ module.exports = function(applicationController, interfaceParams) {
   console.log("------------------------");
   console.log("Taper 1 pour Ajouter un vote");
 
-  prompt.question("Choix : ", choice => {
+  prompt.question("Choix : ", (choice) => {
     if (choice === "1") {
-      applicationController.executeAction("Action/Ajouter un vote", {
-        titreDuSondage: sondage.titre
-      });
-      displayCurrentView(applicationController, interfaceParams);
+      const nextView = applicationController.executeAction(
+        "Action/Ajouter un vote",
+        {
+          titreDuSondage: sondage.titre,
+        }
+      );
+      displayView(nextView, applicationController, interfaceParams);
     } else {
-      displayCurrentView(applicationController, interfaceParams);
+      displayView(view, applicationController, interfaceParams);
     }
   });
 };

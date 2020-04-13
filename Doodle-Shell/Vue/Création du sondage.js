@@ -1,8 +1,8 @@
 const prompt = require("../../Interface/Shell/prompt");
-const displayCurrentView = require("../../Interface/Shell/displayCurrentView");
+const displayView = require("../../Interface/Shell/displayView");
 
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   console.log("=============================");
   console.log("=   Création d'un sondage   =");
@@ -16,19 +16,25 @@ module.exports = function(applicationController, interfaceParams) {
   console.log("Taper 1 pour Ajouter une option");
   console.log("Taper 2 pour Publier le sondage");
 
-  prompt.question("Choix : ", choice => {
+  prompt.question("Choix : ", (choice) => {
     if (choice === "1") {
-      applicationController.executeAction("Action/Ajouter une option", {
-        titreDuSondage: sondage.titre
-      });
-      displayCurrentView(applicationController, interfaceParams);
+      const nextView = applicationController.executeAction(
+        "Action/Ajouter une option",
+        {
+          titreDuSondage: sondage.titre,
+        }
+      );
+      displayView(nextView, applicationController, interfaceParams);
     } else if (choice === "2") {
-      applicationController.executeAction("Action/Publier le sondage", {
-        titreDuSondage: sondage.titre
-      });
-      displayCurrentView(applicationController, interfaceParams);
+      const nextView = applicationController.executeAction(
+        "Action/Publier le sondage",
+        {
+          titreDuSondage: sondage.titre,
+        }
+      );
+      displayView(nextView, applicationController, interfaceParams);
     } else {
-      displayCurrentView(applicationController, interfaceParams);
+      displayView(view, applicationController, interfaceParams);
     }
   });
 };

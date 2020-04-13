@@ -1,5 +1,5 @@
-module.exports = function(applicationController, interfaceParams) {
-  const { sondage } = applicationController.getCurrentViewContent();
+module.exports = function (view, applicationController, interfaceParams) {
+  const { sondage } = view.content;
 
   const html = `
     <h1>Ajouter un vote</h1>
@@ -15,17 +15,21 @@ module.exports = function(applicationController, interfaceParams) {
 
       <h2>Choix</h2>
       <ul>
-        ${sondage.options.map(option => `
+        ${sondage.options
+          .map(
+            (option) => `
           <li>
             <label for="participant">${option}</label>
             <input type="checkbox" id="${option}" name="choix" value="${option}">
           </li>
-        `).join('\n')}
+        `
+          )
+          .join("\n")}
       </ul>    
 
       <button type="submit">Valider le vote</button>
     </form>
-  `
+  `;
 
   return html;
 };

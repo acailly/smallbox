@@ -1,5 +1,5 @@
 const createView = require("../../Engine/createView");
 
 module.exports = function (application, params) {
-  return createView(application, "Vue/Ajout d'un sondage");
+  return createView(application, "Vue/Accueil");
 };

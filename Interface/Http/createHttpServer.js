@@ -14,10 +14,10 @@ function applyCors(res) {
   );
 }
 
-function showCurrentView(applicationController, interfaceParams, res) {
-  const viewName = applicationController.getCurrentViewName();
-  const view = require(`${interfaceParams.rootDir}/${viewName}`);
-  const body = view(applicationController, interfaceParams);
+function showView(view, applicationController, interfaceParams, res) {
+  const viewName = view.name;
+  const htmlView = require(`${interfaceParams.rootDir}/${viewName}`);
+  const body = htmlView(view, applicationController, interfaceParams);
 
   const data = `
     <!DOCTYPE html>
@@ -48,7 +48,7 @@ function collectRequestData(request, callback) {
     });
     request.on("end", () => {
       const parsedBody = parse(body);
-      const parsedBodyAsObject = JSON.parse(JSON.stringify(parsedBody)); 
+      const parsedBodyAsObject = JSON.parse(JSON.stringify(parsedBody));
       callback(parsedBodyAsObject);
     });
   } else {
@@ -81,13 +81,17 @@ function createHttpServer(applicationController, interfaceParams) {
         // }
 
         if (req.method === "GET") {
-          showCurrentView(applicationController, interfaceParams, res);
+          const nextView = applicationController.executeStartAction();
+          showView(nextView, applicationController, interfaceParams, res);
         } else if (req.method === "POST") {
           collectRequestData(req, (actionParams) => {
             const actionName = decodeURIComponent(parsedUrl.pathname);
-            applicationController.executeAction(actionName, actionParams);
+            const nextView = applicationController.executeAction(
+              actionName,
+              actionParams
+            );
 
-            showCurrentView(applicationController, interfaceParams, res);
+            showView(nextView, applicationController, interfaceParams, res);
           });
         }
       } catch (e) {
