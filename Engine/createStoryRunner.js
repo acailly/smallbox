@@ -1,4 +1,4 @@
-module.exports = function (
+function checkCurrentView(
   view,
   expectedViewName,
   expectedViewParams,
@@ -36,4 +36,25 @@ module.exports = function (
       );
     }
   }
+}
+
+module.exports = function (applicationController, targetFile) {
+  return {
+    executeStartAction: () => applicationController.executeStartAction(),
+    executeAction: (actionName, actionParams) =>
+      applicationController.executeAction(actionName, actionParams),
+    checkCurrentView: (
+      view,
+      expectedViewName,
+      expectedViewParams,
+      expectedViewContent
+    ) => {
+      checkCurrentView(
+        view,
+        expectedViewName,
+        expectedViewParams,
+        expectedViewContent
+      );
+    },
+  };
 };

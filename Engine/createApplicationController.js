@@ -1,27 +1,35 @@
 const executeAction = require("./executeAction");
-const checkCurrentView = require("./checkCurrentView");
 
 module.exports = function (application) {
+  const listeners = [];
+
+  function doExecuteAction(application, actionName, actionParams) {
+    listeners.forEach((listener) => {
+      listener.beforeAction(actionName, actionParams);
+    });
+
+    const nextView = executeAction(application, actionName, actionParams);
+
+    listeners.forEach((listener) => {
+      listener.afterAction(actionName, actionParams, nextView);
+    });
+
+    return nextView;
+  }
+
   return {
-    executeStartAction: () =>
-      executeAction(
+    executeStartAction: () => {
+      return doExecuteAction(
         application,
         application.startActionName,
         application.startActionParams
-      ),
-    executeAction: (actionName, actionParams) =>
-      executeAction(application, actionName, actionParams),
-    checkCurrentView: (
-      view,
-      expectedViewName,
-      expectedViewParams,
-      expectedViewContent
-    ) =>
-      checkCurrentView(
-        view,
-        expectedViewName,
-        expectedViewParams,
-        expectedViewContent
-      ),
+      );
+    },
+    executeAction: (actionName, actionParams) => {
+      return doExecuteAction(application, actionName, actionParams);
+    },
+    addListener: (listener) => {
+      listeners.push(listener);
+    },
   };
 };

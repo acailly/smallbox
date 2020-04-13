@@ -1,31 +1,6 @@
 const fs = require("fs");
 
-function valueToHtml(value) {
-  if (value === undefined) {
-    return "";
-  }
-
-  if (Array.isArray(value)) {
-    let html = "<ul>";
-    for (v of value) {
-      html += `<li>${valueToHtml(v)}</li>`;
-    }
-    html += "</ul>";
-    return html;
-  } else if (typeof value === "object") {
-    let html = "<ul>";
-    const keys = Object.keys(value || {});
-    for (key of keys) {
-      html += `<li>${key} : ${valueToHtml(value[key])}</li>`;
-    }
-    html += "</ul>";
-    return html;
-  } else {
-    return JSON.stringify(value, null, 2);
-  }
-}
-
-module.exports = function (applicationController, targetFile) {
+module.exports = function (targetFile) {
   const html = `
     <style>
       .card {
@@ -60,8 +35,7 @@ module.exports = function (applicationController, targetFile) {
   fs.writeFileSync(targetFile, html);
 
   return {
-    executeStartAction: () => applicationController.executeStartAction(),
-    executeAction: (actionName, actionParams) => {
+    beforeAction: (actionName, actionParams) => {
       const splittedActionName = actionName.split("/");
       const actionNameSuffix = splittedActionName.pop();
       const actionNamePrefix = splittedActionName.join("/");
@@ -75,16 +49,9 @@ module.exports = function (applicationController, targetFile) {
         </div>
       `;
       fs.appendFileSync(targetFile, html);
-
-      return applicationController.executeAction(actionName, actionParams);
     },
-    checkCurrentView: (
-      view,
-      expectedViewName,
-      expectedViewParams,
-      expectedViewContent
-    ) => {
-      const splittedViewName = expectedViewName.split("/");
+    afterAction: (actionName, actionParams, nextView) => {
+      const splittedViewName = nextView.name.split("/");
       const viewNameSuffix = splittedViewName.pop();
       const viewNamePrefix = splittedViewName.join("/");
       const html = `
@@ -96,27 +63,45 @@ module.exports = function (applicationController, targetFile) {
             <div>
               <h3>Paramètres :</h3>
               <p>
-              ${valueToHtml(expectedViewParams)}
+              ${valueToHtml(nextView.params)}
               </p>
             </div>
             <div class="width-70"></div>
             <div>
               <h3>Contenu :</h3>
               <p>
-                ${valueToHtml(expectedViewContent)}
+                ${valueToHtml(nextView.content)}
               </p>
             </div>
           </div>
         </div>
       `;
       fs.appendFileSync(targetFile, html);
-
-      applicationController.checkCurrentView(
-        view,
-        expectedViewName,
-        expectedViewParams,
-        expectedViewContent
-      );
     },
   };
 };
+
+function valueToHtml(value) {
+  if (value === undefined) {
+    return "";
+  }
+
+  if (Array.isArray(value)) {
+    let html = "<ul>";
+    for (v of value) {
+      html += `<li>${valueToHtml(v)}</li>`;
+    }
+    html += "</ul>";
+    return html;
+  } else if (typeof value === "object") {
+    let html = "<ul>";
+    const keys = Object.keys(value || {});
+    for (key of keys) {
+      html += `<li>${key} : ${valueToHtml(value[key])}</li>`;
+    }
+    html += "</ul>";
+    return html;
+  } else {
+    return JSON.stringify(value, null, 2);
+  }
+}

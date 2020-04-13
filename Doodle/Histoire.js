@@ -1,12 +1,18 @@
 const Application = require("./Application");
 const createApplicationController = require("../Engine/createApplicationController");
-const createStoryWrapper = require("../Engine/createStoryWrapper");
+const createStoryRunner = require("../Engine/createStoryRunner");
 
 const application = Application();
 const applicationController = createApplicationController(application);
 
+const createConsoleLogger = require("../Listeners/createConsoleLogger");
+applicationController.addListener(createConsoleLogger());
+
+const createHtmlLogger = require("../Listeners/createHtmlLogger");
 const storyFile = __dirname + "/Histoire.html";
-const ʘ_ʘ = createStoryWrapper(applicationController, storyFile);
+applicationController.addListener(createHtmlLogger(storyFile));
+
+const ʘ_ʘ = createStoryRunner(applicationController);
 
 let view;
 
