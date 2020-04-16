@@ -8,6 +8,7 @@ Small toolbox for small apps
 
 ## ETIRER LE CONCEPT
 
+- Rendre plus joli l'interface Web
 - Faire un stockage fichier
 - Faire un doodle distribué via une synchro git
 - Faire une interface en pure JS pour faire une SPA ? (service worker ?)
