@@ -40,6 +40,20 @@ function showView(viewRef, applicationController, interfaceParams, res) {
   res.end(data);
 }
 
+function redirectToView(viewRef, res){
+  const urlParams = new URLSearchParams();
+  for (let key in viewRef.params) {
+    if (viewRef.params.hasOwnProperty(key)) {
+      urlParams.append(key, viewRef.params[key])
+    }
+  }
+
+  const path = `/${encodeURIComponent(viewRef.name)}?${urlParams.toString()}`
+
+  res.writeHead(302, {'Location': path});
+  res.end();
+}
+
 // From https://itnext.io/how-to-handle-the-post-request-body-in-node-js-without-using-a-framework-cd2038b93190
 function collectRequestData(request, callback) {
   const FORM_URLENCODED = "application/x-www-form-urlencoded";
@@ -91,9 +105,7 @@ function createHttpServer(applicationController, interfaceParams) {
           }
           else{
             const nextViewRef = applicationController.executeStartAction();
-
-            // TODO ACY Rediriger vers GET/ viewName?viewParams
-            showView(nextViewRef, applicationController, interfaceParams, res);
+            redirectToView(nextViewRef, res);
           }          
         } else if (req.method === "POST") {
           collectRequestData(req, (actionParams) => {
@@ -102,9 +114,8 @@ function createHttpServer(applicationController, interfaceParams) {
               actionName,
               actionParams
             );
-
-            // TODO ACY Rediriger vers GET/ viewName?viewParams
-            showView(nextViewRef, applicationController, interfaceParams, res);
+            
+            redirectToView(nextViewRef, res);
           });
         }
       } catch (e) {
