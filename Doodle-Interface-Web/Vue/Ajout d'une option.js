@@ -4,12 +4,12 @@ module.exports = function (view, applicationController, interfaceParams) {
   const html = `
     <h1>Ajout d'une option</h1>
 
-    <h2>Titre du sondage : ${sondage.titre}</h2>
-
     <form method="POST" action="/Action/Revenir au sondage">
       <input type="hidden" name="titreDuSondage" value="${sondage.titre}">
       <button type="submit">Revenir au sondage</button>
     </form>
+
+    <h2>Titre du sondage : ${sondage.titre}</h2>
 
     <h2>Options</h2>
     <ul>

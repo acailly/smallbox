@@ -1,7 +1,13 @@
 const ApplicationParams = require("./ApplicationParams");
-const applicationParams = ApplicationParams();
-
 const createApplicationController = require("../Engine/createApplicationController");
+
+const applicationParams = ApplicationParams();
+const stockageApplicationParams = require("../Doodle-Persistence-Memoire/ApplicationParams")();
+const stockageApplicationController = createApplicationController(
+  stockageApplicationParams
+);
+applicationParams.stockage = stockageApplicationController;
+
 const applicationController = createApplicationController(applicationParams);
 
 const createConsoleLogger = require("../Listeners/createConsoleLogger");
@@ -106,6 +112,46 @@ viewRef = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
 // Revenir à la page de création du sondage
 
 viewRef = ʘ_ʘ.executeAction("Action/Revenir au sondage", {
+  titreDuSondage: "Prénom du bébé",
+});
+ʘ_ʘ.checkCurrentView(
+  viewRef,
+  "Vue/Création du sondage",
+  {
+    titreDuSondage: "Prénom du bébé",
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: false,
+      options: ["Lise", "Emma"],
+      votes: [],
+    },
+  }
+);
+
+// Revenir à la liste des sondages
+
+viewRef = ʘ_ʘ.executeAction("Action/Revenir à la liste des sondages");
+ʘ_ʘ.checkCurrentView(
+  viewRef,
+  "Vue/Accueil",
+  {},
+  {
+    sondages: [
+      {
+        titre: "Prénom du bébé",
+        publié: false,
+        options: ["Lise", "Emma"],
+        votes: [],
+      },
+    ],
+  }
+);
+
+// Ouvrir un sondage existant
+
+viewRef = ʘ_ʘ.executeAction("Action/Ouvrir un sondage existant", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
@@ -229,6 +275,76 @@ viewRef = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
     { option: "Lise", réponse: true },
     { option: "Emma", réponse: false },
   ],
+});
+ʘ_ʘ.checkCurrentView(
+  viewRef,
+  "Vue/Votes",
+  {
+    titreDuSondage: "Prénom du bébé",
+  },
+  {
+    sondage: {
+      titre: "Prénom du bébé",
+      publié: true,
+      options: ["Lise", "Emma"],
+      votes: [
+        {
+          participant: "Alice",
+          choix: [
+            { option: "Lise", réponse: false },
+            { option: "Emma", réponse: true },
+          ],
+        },
+        {
+          participant: "Bob",
+          choix: [
+            { option: "Lise", réponse: true },
+            { option: "Emma", réponse: false },
+          ],
+        },
+      ],
+    },
+  }
+);
+
+// Revenir à la liste des sondages
+
+viewRef = ʘ_ʘ.executeAction("Action/Revenir à la liste des sondages");
+ʘ_ʘ.checkCurrentView(
+  viewRef,
+  "Vue/Accueil",
+  {},
+  {
+    sondages: [
+      {
+        titre: "Prénom du bébé",
+        publié: true,
+        options: ["Lise", "Emma"],
+        votes: [
+          {
+            participant: "Alice",
+            choix: [
+              { option: "Lise", réponse: false },
+              { option: "Emma", réponse: true },
+            ],
+          },
+          {
+            participant: "Bob",
+            choix: [
+              { option: "Lise", réponse: true },
+              { option: "Emma", réponse: false },
+            ],
+          },
+        ],
+      },
+    ],
+  }
+);
+
+// Ouvrir un sondage existant
+
+viewRef = ʘ_ʘ.executeAction("Action/Ouvrir un sondage existant", {
+  titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
   viewRef,

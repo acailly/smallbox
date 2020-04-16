@@ -3,6 +3,10 @@ module.exports = function (view, applicationController, interfaceParams) {
 
   const html = `
     <h1>Création d'un sondage</h1>
+  
+    <form method="POST" action="/Action/Revenir à la liste des sondages">
+      <button type="submit">Revenir à la liste des sondages</button>
+    </form>
 
     <h2>Titre : ${sondage.titre}</h2>
 

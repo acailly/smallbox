@@ -12,6 +12,7 @@ module.exports = function (view, applicationController, interfaceParams) {
   console.log("\t<(^-^)>     Que veux tu faire :");
   console.log("\t<(^-^)>     ajouter une OPTION ?");
   console.log("\t<(^-^)>     PUBLIER le sondage ?");
+  console.log("\t<(^-^)>     REVENIR à la liste des sondages ?");
 
   prompt.question("choix >", (choice) => {
     if (choice.toLowerCase() === "option") {
@@ -28,6 +29,11 @@ module.exports = function (view, applicationController, interfaceParams) {
         {
           titreDuSondage: sondage.titre,
         }
+      );
+      displayView(nextViewRef, applicationController, interfaceParams);
+    } else if (choice.toLowerCase() === "revenir") {
+      const nextViewRef = applicationController.executeAction(
+        "Action/Revenir à la liste des sondages"
       );
       displayView(nextViewRef, applicationController, interfaceParams);
     } else {

@@ -6,7 +6,24 @@ module.exports = function (view, applicationController, interfaceParams) {
 
     <h2>Sondages</h2>
     <ul>
-      ${sondages.map((sondage) => `<li>${sondage.titre}</li>`).join("\n")}
+      ${sondages
+        .map(
+          (sondage) => `
+        <li>
+          <div style="display:flex">
+            ${sondage.titre}
+            (${sondage.publié ? "publié" : "en cours de création"})
+            <form method="POST" action="/Action/Ouvrir un sondage existant">
+              <input type="hidden" name="titreDuSondage" value="${
+                sondage.titre
+              }">
+              <button style="margin-left:10px" type="submit">Ouvrir</button>
+            </form>
+          </div>
+        </li>
+        `
+        )
+        .join("\n")}
     </ul>
 
     <form method="POST" action="/Action/Ajouter un nouveau sondage">
