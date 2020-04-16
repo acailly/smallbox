@@ -10,7 +10,7 @@ module.exports = function (applicationParams, actionParams) {
 
   sondage.publié = true;
 
-  return createViewRef( "Vue/Contenu d'un objet", {
-    objet: sondage
+  return createViewRef("Vue/Sondage", {
+    titreDuSondage,
   });
 };

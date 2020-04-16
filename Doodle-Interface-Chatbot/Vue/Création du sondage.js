@@ -10,11 +10,11 @@ module.exports = function (view, applicationController, interfaceParams) {
   console.log(sondage.options);
   console.log("");
   console.log("\t<(^-^)>     Que veux tu faire :");
-  console.log("\t<(^-^)>     AJOUTER une option ?");
+  console.log("\t<(^-^)>     ajouter une OPTION ?");
   console.log("\t<(^-^)>     PUBLIER le sondage ?");
 
   prompt.question("choix >", (choice) => {
-    if (choice.toLowerCase() === "ajouter") {
+    if (choice.toLowerCase() === "option") {
       const nextViewRef = applicationController.executeAction(
         "Action/Ajouter une option",
         {

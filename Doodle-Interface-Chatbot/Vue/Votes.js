@@ -22,13 +22,13 @@ module.exports = function (view, applicationController, interfaceParams) {
         .join("|");
     console.log(line);
   });
-  
+
   console.log("");
   console.log("\t<(^-^)>     Que veux tu faire :");
-  console.log("\t<(^-^)>     AJOUTER un vote ?");
+  console.log("\t<(^-^)>     ajouter un VOTE ?");
 
   prompt.question("choix >", (choice) => {
-    if (choice.toLowerCase() === "ajouter") {
+    if (choice.toLowerCase() === "vote") {
       const nextViewRef = applicationController.executeAction(
         "Action/Ajouter un vote",
         {

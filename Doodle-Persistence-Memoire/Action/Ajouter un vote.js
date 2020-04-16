@@ -17,7 +17,7 @@ module.exports = function (applicationParams, actionParams) {
     choix,
   });
 
-  return createViewRef( "Vue/Contenu d'un objet", {
-    objet: sondage.votes
+  return createViewRef("Vue/Sondage", {
+    titreDuSondage,
   });
 };

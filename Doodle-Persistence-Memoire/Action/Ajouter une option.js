@@ -14,7 +14,7 @@ module.exports = function (applicationParams, actionParams) {
 
   sondage.options.push(option);
 
-  return createViewRef( "Vue/Contenu d'un objet", {
-    objet: sondage.options
+  return createViewRef("Vue/Sondage", {
+    titreDuSondage,
   });
 };
