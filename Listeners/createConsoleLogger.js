@@ -1,10 +1,10 @@
 module.exports = function () {
   return {
-    beforeAction: (actionName, actionParams) => {
+    beforeExecuteAction: (actionName, actionParams) => {
       console.log("(ACTION)", actionName, actionParams || "");
     },
-    afterAction: (actionName, actionParams, nextView) => {
-      console.log("(VIEW)", nextView.name, nextView.params || "");
+    afterExecuteAction: (actionName, actionParams, nextViewRef) => {
+      console.log("(VIEW)", nextViewRef.name, nextViewRef.params || "");
     },
   };
 };

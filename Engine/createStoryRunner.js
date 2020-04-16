@@ -1,9 +1,12 @@
 function checkCurrentView(
-  view,
+  applicationController,
+  viewRef,
   expectedViewName,
   expectedViewParams,
   expectedViewContent
 ) {
+  const view = applicationController.createViewFromViewRef(viewRef);
+
   const actualViewName = view.name;
   if (actualViewName !== expectedViewName) {
     throw new Error(
@@ -32,7 +35,7 @@ function checkCurrentView(
     );
     if (actualViewContentJson !== expectedViewContentJson) {
       throw new Error(
-        `Expected view params are '${expectedViewContentJson}', current view params are '${actualViewContentJson}'`
+        `Expected view content is '${expectedViewContentJson}', current view content is '${actualViewContentJson}'`
       );
     }
   }
@@ -44,13 +47,14 @@ module.exports = function (applicationController) {
     executeAction: (actionName, actionParams) =>
       applicationController.executeAction(actionName, actionParams),
     checkCurrentView: (
-      view,
+      viewRef,
       expectedViewName,
       expectedViewParams,
       expectedViewContent
     ) => {
       checkCurrentView(
-        view,
+        applicationController,
+        viewRef,
         expectedViewName,
         expectedViewParams,
         expectedViewContent

@@ -9,7 +9,7 @@ const interfaceParams = {
   rootDir: __dirname,
 };
 
-const view = applicationController.executeAction(
+const viewRef = applicationController.executeAction(
   "Action/Démarrer l'application"
 );
-displayView(view, applicationController, interfaceParams);
+displayView(viewRef, applicationController, interfaceParams);

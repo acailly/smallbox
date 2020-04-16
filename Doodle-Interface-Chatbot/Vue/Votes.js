@@ -29,13 +29,13 @@ module.exports = function (view, applicationController, interfaceParams) {
 
   prompt.question("choix >", (choice) => {
     if (choice.toLowerCase() === "ajouter") {
-      const nextView = applicationController.executeAction(
+      const nextViewRef = applicationController.executeAction(
         "Action/Ajouter un vote",
         {
           titreDuSondage: sondage.titre,
         }
       );
-      displayView(nextView, applicationController, interfaceParams);
+      displayView(nextViewRef, applicationController, interfaceParams);
     } else {
       displayView(view, applicationController, interfaceParams);
     }

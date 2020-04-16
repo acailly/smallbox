@@ -1,7 +1,7 @@
-const createView = require("../../Engine/createView");
+const createViewRef = require("../../Engine/createViewRef");
 
 module.exports = function (applicationParams, actionParams) {
-  return createView(applicationParams, "Vue/Contenu d'un objet", {
+  return createViewRef( "Vue/Contenu d'un objet", {
     objet: mémoire
   });
 };

@@ -35,7 +35,7 @@ module.exports = function (targetFile) {
   fs.writeFileSync(targetFile, html);
 
   return {
-    beforeAction: (actionName, actionParams) => {
+    beforeExecuteAction: (actionName, actionParams) => {
       const splittedActionName = actionName.split("/");
       const actionNameSuffix = splittedActionName.pop();
       const actionNamePrefix = splittedActionName.join("/");
@@ -50,8 +50,8 @@ module.exports = function (targetFile) {
       `;
       fs.appendFileSync(targetFile, html);
     },
-    afterAction: (actionName, actionParams, nextView) => {
-      const splittedViewName = nextView.name.split("/");
+    afterCreateView: (view) => {
+      const splittedViewName = view.name.split("/");
       const viewNameSuffix = splittedViewName.pop();
       const viewNamePrefix = splittedViewName.join("/");
       const html = `
@@ -63,14 +63,14 @@ module.exports = function (targetFile) {
             <div>
               <h3>Paramètres :</h3>
               <p>
-              ${valueToHtml(nextView.params)}
+              ${valueToHtml(view.params)}
               </p>
             </div>
             <div class="width-70"></div>
             <div>
               <h3>Contenu :</h3>
               <p>
-                ${valueToHtml(nextView.content)}
+                ${valueToHtml(view.content)}
               </p>
             </div>
           </div>

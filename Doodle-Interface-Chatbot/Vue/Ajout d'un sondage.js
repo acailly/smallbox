@@ -6,12 +6,12 @@ module.exports = function (view, applicationController, interfaceParams) {
   console.log("\t<(^-^)>     C'est quoi son petit nom ?");
 
   prompt.question("nom du sondage >", (text) => {
-    const nextView = applicationController.executeAction(
+    const nextViewRef = applicationController.executeAction(
       "Action/Valider le nouveau sondage",
       {
         titre: text,
       }
     );
-    displayView(nextView, applicationController, interfaceParams);
+    displayView(nextViewRef, applicationController, interfaceParams);
   });
 };

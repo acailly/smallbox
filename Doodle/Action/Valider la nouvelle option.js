@@ -1,4 +1,4 @@
-const createView = require("../../Engine/createView");
+const createViewRef = require("../../Engine/createViewRef");
 
 module.exports = function (applicationParams, actionParams) {
   const { titreDuSondage, option } = actionParams;
@@ -8,7 +8,7 @@ module.exports = function (applicationParams, actionParams) {
     option
   })
 
-  return createView(applicationParams, "Vue/Ajout d'une option", {
+  return createViewRef( "Vue/Ajout d'une option", {
     titreDuSondage,
   });
 };

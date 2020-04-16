@@ -14,22 +14,22 @@ applicationController.addListener(createHtmlLogger(storyFile));
 const createStoryRunner = require("../Engine/createStoryRunner");
 const ʘ_ʘ = createStoryRunner(applicationController);
 
-let view;
+let viewRef;
 
 // Démarrer l'application
 
-view = ʘ_ʘ.executeStartAction();
-ʘ_ʘ.checkCurrentView(view, "Vue/Accueil", {}, { sondages: [] });
+viewRef = ʘ_ʘ.executeStartAction();
+ʘ_ʘ.checkCurrentView(viewRef, "Vue/Accueil", {}, { sondages: [] });
 
 // Créer un sondage
 
-view = ʘ_ʘ.executeAction("Action/Ajouter un nouveau sondage");
-ʘ_ʘ.checkCurrentView(view, "Vue/Ajout d'un sondage", {}, {});
-view = ʘ_ʘ.executeAction("Action/Valider le nouveau sondage", {
+viewRef = ʘ_ʘ.executeAction("Action/Ajouter un nouveau sondage");
+ʘ_ʘ.checkCurrentView(viewRef, "Vue/Ajout d'un sondage", {}, {});
+viewRef = ʘ_ʘ.executeAction("Action/Valider le nouveau sondage", {
   titre: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Création du sondage",
   {
     titreDuSondage: "Prénom du bébé",
@@ -46,11 +46,11 @@ view = ʘ_ʘ.executeAction("Action/Valider le nouveau sondage", {
 
 // Ajouter une option
 
-view = ʘ_ʘ.executeAction("Action/Ajouter une option", {
+viewRef = ʘ_ʘ.executeAction("Action/Ajouter une option", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Ajout d'une option",
   {
     titreDuSondage: "Prénom du bébé",
@@ -64,12 +64,12 @@ view = ʘ_ʘ.executeAction("Action/Ajouter une option", {
     },
   }
 );
-view = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
+viewRef = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Lise",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Ajout d'une option",
   {
     titreDuSondage: "Prénom du bébé",
@@ -83,12 +83,12 @@ view = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
     },
   }
 );
-view = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
+viewRef = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
   titreDuSondage: "Prénom du bébé",
   option: "Emma",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Ajout d'une option",
   {
     titreDuSondage: "Prénom du bébé",
@@ -105,11 +105,11 @@ view = ʘ_ʘ.executeAction("Action/Valider la nouvelle option", {
 
 // Revenir à la page de création du sondage
 
-view = ʘ_ʘ.executeAction("Action/Revenir au sondage", {
+viewRef = ʘ_ʘ.executeAction("Action/Revenir au sondage", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Création du sondage",
   {
     titreDuSondage: "Prénom du bébé",
@@ -126,11 +126,11 @@ view = ʘ_ʘ.executeAction("Action/Revenir au sondage", {
 
 // Publier le sondage
 
-view = ʘ_ʘ.executeAction("Action/Publier le sondage", {
+viewRef = ʘ_ʘ.executeAction("Action/Publier le sondage", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Votes",
   {
     titreDuSondage: "Prénom du bébé",
@@ -147,11 +147,11 @@ view = ʘ_ʘ.executeAction("Action/Publier le sondage", {
 
 // Ajouter un vote
 
-view = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
+viewRef = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Ajout d'un vote",
   {
     titreDuSondage: "Prénom du bébé",
@@ -165,7 +165,7 @@ view = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
     },
   }
 );
-view = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
+viewRef = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Alice",
   choix: [
@@ -174,7 +174,7 @@ view = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   ],
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Votes",
   {
     titreDuSondage: "Prénom du bébé",
@@ -196,11 +196,11 @@ view = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
     },
   }
 );
-view = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
+viewRef = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
   titreDuSondage: "Prénom du bébé",
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Ajout d'un vote",
   {
     titreDuSondage: "Prénom du bébé",
@@ -222,7 +222,7 @@ view = ʘ_ʘ.executeAction("Action/Ajouter un vote", {
     },
   }
 );
-view = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
+viewRef = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   titreDuSondage: "Prénom du bébé",
   participant: "Bob",
   choix: [
@@ -231,7 +231,7 @@ view = ʘ_ʘ.executeAction("Action/Valider le nouveau vote", {
   ],
 });
 ʘ_ʘ.checkCurrentView(
-  view,
+  viewRef,
   "Vue/Votes",
   {
     titreDuSondage: "Prénom du bébé",

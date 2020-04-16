@@ -1,4 +1,4 @@
-const createView = require("../../Engine/createView");
+const createViewRef = require("../../Engine/createViewRef");
 const mémoire = require("../mémoire");
 
 module.exports = function (applicationParams, actionParams) {
@@ -14,7 +14,7 @@ module.exports = function (applicationParams, actionParams) {
 
   sondage.options.push(option);
 
-  return createView(applicationParams, "Vue/Contenu d'un objet", {
+  return createViewRef( "Vue/Contenu d'un objet", {
     objet: sondage.options
   });
 };

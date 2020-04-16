@@ -34,7 +34,7 @@ module.exports = function (view, applicationController, interfaceParams) {
         }
       );
     } else {
-      const nextView = applicationController.executeAction(
+      const nextViewRef = applicationController.executeAction(
         "Action/Valider le nouveau vote",
         {
           titreDuSondage: sondage.titre,
@@ -42,7 +42,7 @@ module.exports = function (view, applicationController, interfaceParams) {
           choix,
         }
       );
-      displayView(nextView, applicationController, interfaceParams);
+      displayView(nextViewRef, applicationController, interfaceParams);
     }
   }
 };

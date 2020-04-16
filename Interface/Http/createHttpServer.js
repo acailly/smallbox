@@ -14,7 +14,9 @@ function applyCors(res) {
   );
 }
 
-function showView(view, applicationController, interfaceParams, res) {
+function showView(viewRef, applicationController, interfaceParams, res) {
+  const view = applicationController.createViewFromViewRef(viewRef);
+
   const viewName = view.name;
   const htmlView = require(`${interfaceParams.rootDir}/${viewName}`);
   const body = htmlView(view, applicationController, interfaceParams);
@@ -73,25 +75,36 @@ function createHttpServer(applicationController, interfaceParams) {
 
         applyCors(res);
 
-        // TODO ACY Quand doit on utiliser les queryParams ?
-        // const searchParams = new URLSearchParams(parsedUrl.query);
-        // const params = {};
-        // for (const key of searchParams.keys()) {
-        //   params[key] = searchParams.get(key);
-        // }
-
         if (req.method === "GET") {
-          const nextView = applicationController.executeStartAction();
-          showView(nextView, applicationController, interfaceParams, res);
+          const viewName = decodeURIComponent(parsedUrl.pathname.substring(1));
+          if(viewName){
+            const searchParams = new URLSearchParams(parsedUrl.query);
+            const viewParams = {};
+            for (const key of searchParams.keys()) {
+              viewParams[key] = searchParams.get(key);
+            }
+            const nextViewRef = {
+              name: viewName,
+              params: viewParams
+            }
+            showView(nextViewRef, applicationController, interfaceParams, res);
+          }
+          else{
+            const nextViewRef = applicationController.executeStartAction();
+
+            // TODO ACY Rediriger vers GET/ viewName?viewParams
+            showView(nextViewRef, applicationController, interfaceParams, res);
+          }          
         } else if (req.method === "POST") {
           collectRequestData(req, (actionParams) => {
             const actionName = decodeURIComponent(parsedUrl.pathname);
-            const nextView = applicationController.executeAction(
+            const nextViewRef = applicationController.executeAction(
               actionName,
               actionParams
             );
 
-            showView(nextView, applicationController, interfaceParams, res);
+            // TODO ACY Rediriger vers GET/ viewName?viewParams
+            showView(nextViewRef, applicationController, interfaceParams, res);
           });
         }
       } catch (e) {
