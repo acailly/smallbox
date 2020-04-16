@@ -4,10 +4,8 @@ Small toolbox for small apps
 
 ## TODO
 
-- Continuer l'implémentation de Doodle-Persistence-Mémoire
-  - Le stockage ne devrait pas se faire dans l'application (ou applicationParams)
-  - Le stockage pourrait se faire via une autre application dédiée au stockage qu'on passe dans l'applicationParams
 - Transformer l'interface shell en un chatbot, plus simple et plus différent que l'interface HTTP
+- Faire en sorte que l'on redirige le navigateur vers l'URL /viewName?viewparams après chaque action
 
 ## ETIRER LE CONCEPT
 

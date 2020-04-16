@@ -3,11 +3,9 @@ const createView = require("../../Engine/createView");
 module.exports = function (applicationParams, actionParams) {
   const { titreDuSondage } = actionParams;
 
-  const sondage = applicationParams.sondages.find(
-    (sondage) => sondage.titre === titreDuSondage
-  );
-
-  sondage.publié = true;
+  applicationParams.stockage.executeAction("Action/Publier un sondage", {
+    titreDuSondage
+  })
 
   return createView(applicationParams, "Vue/Votes", { titreDuSondage });
 };

@@ -1,5 +1,7 @@
 const mémoire = require("../mémoire");
 
 module.exports = function (applicationParams, viewParams) {
-  return mémoire;
+  const {objet} = viewParams;
+
+  return objet;
 };
