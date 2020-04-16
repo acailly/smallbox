@@ -10,7 +10,7 @@ module.exports = function (view, applicationController, interfaceParams) {
   );
   console.log("\t<(^-^)>     Voici la liste des sondages en cours");
   console.log("");
-  console.log(sondages);
+  console.log(sondages.map((sondage) => sondage.titre));
   console.log("");
   console.log("\t<(^-^)>     Que veux tu faire :");
   console.log("\t<(^-^)>     ajouter un SONDAGE ?");
