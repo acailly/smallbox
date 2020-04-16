@@ -9,8 +9,8 @@ module.exports = function (view, applicationController, interfaceParams) {
       ${sondages.map((sondage) => `<li>${sondage.titre}</li>`).join("\n")}
     </ul>
 
-    <form method="POST" action="/Action/Créer un nouveau sondage">
-      <button type="submit">Créer un nouveau sondage</button>
+    <form method="POST" action="/Action/Ajouter un nouveau sondage">
+      <button type="submit">Ajouter un nouveau sondage</button>
     </form>
   `;
 

@@ -23,7 +23,7 @@ view = ʘ_ʘ.executeStartAction();
 
 // Créer un sondage
 
-view = ʘ_ʘ.executeAction("Action/Créer un nouveau sondage");
+view = ʘ_ʘ.executeAction("Action/Ajouter un nouveau sondage");
 ʘ_ʘ.checkCurrentView(view, "Vue/Ajout d'un sondage", {}, {});
 view = ʘ_ʘ.executeAction("Action/Valider le nouveau sondage", {
   titre: "Prénom du bébé",

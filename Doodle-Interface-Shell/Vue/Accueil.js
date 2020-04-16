@@ -15,7 +15,7 @@ module.exports = function (view, applicationController, interfaceParams) {
   prompt.question("Taper 1 pour Ajouter une sondage : ", (choice) => {
     if (choice === "1") {
       const nextView = applicationController.executeAction(
-        "Action/Créer un nouveau sondage"
+        "Action/Ajouter un nouveau sondage"
       );
       displayView(nextView, applicationController, interfaceParams);
     } else {
