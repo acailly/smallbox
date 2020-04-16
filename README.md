@@ -4,7 +4,7 @@ Small toolbox for small apps
 
 ## TODO
 
-- Faire un stockage avec recutils
+- Faire un stockage avec recutils (https://www.gnu.org/software/recutils/manual/)
 
 ## ETIRER LE CONCEPT
 
