@@ -6,15 +6,19 @@ module.exports = function (applicationParams) {
 
   function doExecuteAction(applicationParams, actionName, actionParams) {
     listeners.forEach((listener) => {
-      if(listener.beforeExecuteAction){
+      if (listener.beforeExecuteAction) {
         listener.beforeExecuteAction(actionName, actionParams);
       }
     });
 
-    const nextViewRef = executeAction(applicationParams, actionName, actionParams);
+    const nextViewRef = executeAction(
+      applicationParams,
+      actionName,
+      actionParams
+    );
 
     listeners.forEach((listener) => {
-      if(listener.afterExecuteAction){
+      if (listener.afterExecuteAction) {
         listener.afterExecuteAction(actionName, actionParams, nextViewRef);
       }
     });
@@ -24,9 +28,9 @@ module.exports = function (applicationParams) {
 
   function doCreateView(applicationParams, viewName, viewParams) {
     const view = createView(applicationParams, viewName, viewParams);
-    
+
     listeners.forEach((listener) => {
-      if(listener.afterCreateView){
+      if (listener.afterCreateView) {
         listener.afterCreateView(view);
       }
     });
@@ -46,11 +50,23 @@ module.exports = function (applicationParams) {
       return doExecuteAction(applicationParams, actionName, actionParams);
     },
     executeActionAndGetView: (actionName, actionParams) => {
-      const viewRef = doExecuteAction(applicationParams, actionName, actionParams);
+      const viewRef = doExecuteAction(
+        applicationParams,
+        actionName,
+        actionParams
+      );
       return doCreateView(applicationParams, viewRef.name, viewRef.params);
     },
     createViewFromViewRef: (viewRef) => {
       return doCreateView(applicationParams, viewRef.name, viewRef.params);
+    },
+    viewExists(viewName) {
+      try {
+        require.resolve(`${applicationParams.rootDir}/${viewName}`);
+      } catch (e) {
+        return false;
+      }
+      return true;
     },
     addListener: (listener) => {
       listeners.push(listener);

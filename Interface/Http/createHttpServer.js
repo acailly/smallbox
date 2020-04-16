@@ -40,17 +40,17 @@ function showView(viewRef, applicationController, interfaceParams, res) {
   res.end(data);
 }
 
-function redirectToView(viewRef, res){
+function redirectToView(viewRef, res) {
   const urlParams = new URLSearchParams();
   for (let key in viewRef.params) {
     if (viewRef.params.hasOwnProperty(key)) {
-      urlParams.append(key, viewRef.params[key])
+      urlParams.append(key, viewRef.params[key]);
     }
   }
 
-  const path = `/${encodeURIComponent(viewRef.name)}?${urlParams.toString()}`
+  const path = `/${encodeURIComponent(viewRef.name)}?${urlParams.toString()}`;
 
-  res.writeHead(302, {'Location': path});
+  res.writeHead(302, { Location: path });
   res.end();
 }
 
@@ -91,22 +91,31 @@ function createHttpServer(applicationController, interfaceParams) {
 
         if (req.method === "GET") {
           const viewName = decodeURIComponent(parsedUrl.pathname.substring(1));
-          if(viewName){
-            const searchParams = new URLSearchParams(parsedUrl.query);
-            const viewParams = {};
-            for (const key of searchParams.keys()) {
-              viewParams[key] = searchParams.get(key);
+          if (viewName) {
+            if (applicationController.viewExists(viewName)) {
+              const searchParams = new URLSearchParams(parsedUrl.query);
+              const viewParams = {};
+              for (const key of searchParams.keys()) {
+                viewParams[key] = searchParams.get(key);
+              }
+              const nextViewRef = {
+                name: viewName,
+                params: viewParams,
+              };
+              showView(
+                nextViewRef,
+                applicationController,
+                interfaceParams,
+                res
+              );
+            } else {
+              // TODO ACY Charger la favicon et autres contenus statiques
+              console.log("ERROR - STATIC ASSET LOADING NOT IMPLEMENTED");
             }
-            const nextViewRef = {
-              name: viewName,
-              params: viewParams
-            }
-            showView(nextViewRef, applicationController, interfaceParams, res);
-          }
-          else{
+          } else {
             const nextViewRef = applicationController.executeStartAction();
             redirectToView(nextViewRef, res);
-          }          
+          }
         } else if (req.method === "POST") {
           collectRequestData(req, (actionParams) => {
             const actionName = decodeURIComponent(parsedUrl.pathname);
@@ -114,7 +123,7 @@ function createHttpServer(applicationController, interfaceParams) {
               actionName,
               actionParams
             );
-            
+
             redirectToView(nextViewRef, res);
           });
         }
