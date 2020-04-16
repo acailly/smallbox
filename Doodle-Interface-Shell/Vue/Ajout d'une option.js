@@ -4,20 +4,14 @@ const displayView = require("../../Interface/Shell/displayView");
 module.exports = function (view, applicationController, interfaceParams) {
   const { sondage } = view.content;
 
-  console.log("==========================");
-  console.log("=   Ajouter une option   =");
-  console.log("==========================");
-  console.log("Titre du sondage :" + sondage.titre);
-  console.log("");
-  console.log("Options :");
-  console.log(sondage.options);
-  console.log("");
-  console.log("------------------------");
+  console.log(`\t<(^-^)>     Le sondage ${sondage.titre} mérite une nouvelle option !`);
+  console.log("\t<(^-^)>     C'est quoi son petit nom ?");
+  console.log("\t<(^-^)>     (Vous pouvez aussi REVENIR à la page du sondage)");
 
   prompt.question(
-    "Taper le nom de la nouvelle option ou 'retour' pour revenir à l'étape précédente : ",
+    "nom de l'option >",
     (option) => {
-      if (option === "retour") {
+      if (option.toLowerCase() === "revenir") {
         const nextView = applicationController.executeAction(
           "Action/Revenir au sondage",
           {

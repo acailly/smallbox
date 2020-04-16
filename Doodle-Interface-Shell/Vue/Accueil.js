@@ -4,16 +4,17 @@ const displayView = require("../../Interface/Shell/displayView");
 module.exports = function (view, applicationController, interfaceParams) {
   const { sondages } = view.content;
 
-  console.log("===============");
-  console.log("=   Accueil   =");
-  console.log("===============");
+  console.log("\t<(^-^)>     Bonjour !");
+  console.log("\t<(^-^)>     Je suis le chatbot qui va te permettre de créer des sondages");
+  console.log("\t<(^-^)>     Voici la liste des sondages en cours");
   console.log("");
   console.log(sondages);
   console.log("");
-  console.log("------------------------");
+  console.log("\t<(^-^)>     Que veux tu faire :");
+  console.log("\t<(^-^)>     AJOUTER un sondage ?");
 
-  prompt.question("Taper 1 pour Ajouter une sondage : ", (choice) => {
-    if (choice === "1") {
+  prompt.question("choix >", (choice) => {
+    if (choice.toLowerCase() === "ajouter") {
       const nextView = applicationController.executeAction(
         "Action/Ajouter un nouveau sondage"
       );

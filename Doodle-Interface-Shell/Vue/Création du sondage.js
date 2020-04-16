@@ -4,20 +4,17 @@ const displayView = require("../../Interface/Shell/displayView");
 module.exports = function (view, applicationController, interfaceParams) {
   const { sondage } = view.content;
 
-  console.log("=============================");
-  console.log("=   Création d'un sondage   =");
-  console.log("=============================");
-  console.log("Titre du sondage :" + sondage.titre);
+  console.log(`\t<(^-^)>     Voila le sondage ${sondage.titre} !`);
+  console.log(`\t<(^-^)>     avec toutes ses supers options :`);
   console.log("");
-  console.log("Options :");
   console.log(sondage.options);
   console.log("");
-  console.log("------------------------");
-  console.log("Taper 1 pour Ajouter une option");
-  console.log("Taper 2 pour Publier le sondage");
+  console.log("\t<(^-^)>     Que veux tu faire :");
+  console.log("\t<(^-^)>     AJOUTER une option ?");
+  console.log("\t<(^-^)>     PUBLIER le sondage ?");
 
-  prompt.question("Choix : ", (choice) => {
-    if (choice === "1") {
+  prompt.question("choix >", (choice) => {
+    if (choice.toLowerCase() === "ajouter") {
       const nextView = applicationController.executeAction(
         "Action/Ajouter une option",
         {
@@ -25,7 +22,7 @@ module.exports = function (view, applicationController, interfaceParams) {
         }
       );
       displayView(nextView, applicationController, interfaceParams);
-    } else if (choice === "2") {
+    } else if (choice.toLowerCase() === "publier") {
       const nextView = applicationController.executeAction(
         "Action/Publier le sondage",
         {

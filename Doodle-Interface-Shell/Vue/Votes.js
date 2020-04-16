@@ -4,10 +4,8 @@ const displayView = require("../../Interface/Shell/displayView");
 module.exports = function (view, applicationController, interfaceParams) {
   const { sondage } = view.content;
 
-  console.log("=============");
-  console.log("=   Votes   =");
-  console.log("=============");
-  console.log("Titre du sondage :" + sondage.titre);
+  console.log(`\t<(^-^)>     Voila le sondage ${sondage.titre} !`);
+  console.log(`\t<(^-^)>     Qui a voté quoi ? Voyez plutôt :`);
   console.log("");
 
   const headers =
@@ -24,12 +22,13 @@ module.exports = function (view, applicationController, interfaceParams) {
         .join("|");
     console.log(line);
   });
+  
   console.log("");
-  console.log("------------------------");
-  console.log("Taper 1 pour Ajouter un vote");
+  console.log("\t<(^-^)>     Que veux tu faire :");
+  console.log("\t<(^-^)>     AJOUTER un vote ?");
 
-  prompt.question("Choix : ", (choice) => {
-    if (choice === "1") {
+  prompt.question("choix >", (choice) => {
+    if (choice.toLowerCase() === "ajouter") {
       const nextView = applicationController.executeAction(
         "Action/Ajouter un vote",
         {
